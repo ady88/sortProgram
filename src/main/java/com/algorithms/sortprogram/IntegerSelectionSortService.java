@@ -4,18 +4,14 @@ public class IntegerSelectionSortService extends AbstractSortService<Integer> {
 
     private static final String ALGORITHM_NAME = "selection sort";
 
-    public IntegerSelectionSortService(Integer[] array) {
-	super(array);
-    }
-
     @Override
-    protected void actualSort() {
+    protected void actualSort(Integer[] array) {
 	int arraySize = array.length;
 
 	for (int i = 0; i < arraySize; i++) {
 	    for (int j = i + 1; j < arraySize; j++) {
 		if (lessThan(array[j], array[i])) {
-		    exchange(i, j);
+		    exchange(array, i, j);
 		}
 	    }
 	}
@@ -25,5 +21,4 @@ public class IntegerSelectionSortService extends AbstractSortService<Integer> {
     protected String getAlgorithmName() {
 	return ALGORITHM_NAME;
     }
-
 }

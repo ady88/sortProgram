@@ -44,5 +44,4 @@ public class SortStatistics {
 	return "SortStatistics{" + "algorithmName=" + algorithmName + ", numberOfExchanges="
 		+ numberOfExchanges + ", duration=" + duration + ", arraySize=" + arraySize + '}';
     }
-
 }

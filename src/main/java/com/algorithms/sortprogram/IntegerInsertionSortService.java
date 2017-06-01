@@ -4,17 +4,20 @@ public class IntegerInsertionSortService extends AbstractSortService<Integer> {
 
     private static final String ALGORITHM_NAME = "insertion sort";
 
-    public IntegerInsertionSortService(Integer[] array) {
-	super(array);
-    }
-
     @Override
-    protected void actualSort() {
+    protected void actualSort(Integer[] array) {
 	int arraySize = array.length;
 
 	for (int i = 1; i < arraySize; i++) {
-	    for (int j = i; j > 0 && lessThan(array[j], array[j - 1]); j--) {
-		exchange(j, j - 1);
+	    int j = i;
+	    int elementToMove = array[i];
+	    while (j > 0 && lessThan(elementToMove, array[j - 1])) {
+		array[j] = array[j - 1];
+		j = j - 1;
+	    }
+
+	    if (i != j) {
+		array[j] = elementToMove;
 	    }
 	}
     }
@@ -23,5 +26,4 @@ public class IntegerInsertionSortService extends AbstractSortService<Integer> {
     protected String getAlgorithmName() {
 	return ALGORITHM_NAME;
     }
-
 }

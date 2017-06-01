@@ -1,22 +1,18 @@
 package com.algorithms.sortprogram;
 
-import java.util.Arrays;
+import com.google.inject.ProvidedBy;
 import java.util.logging.Logger;
 
+@ProvidedBy(SortServiceProvider.class)
 public abstract class AbstractSortService<T extends Comparable> {
 
     private static final Logger LOG = Logger.getLogger(AbstractSortService.class.getName());
     private static final String START_SORT_MESSAGE = "Started %s";
     private static final String END_SORT_MESSAGE = "The %s has finished in %d miliseconds.";
 
-    protected T[] array;
     protected int numberOfExchanges = 0;
 
-    public AbstractSortService(T[] array) {
-	this.array = array;
-    }
-
-    public SortStatistics sort() {
+    public SortStatistics sort(final T[] array) {
 	if (array == null) {
 	    return null;
 	}
@@ -24,7 +20,7 @@ public abstract class AbstractSortService<T extends Comparable> {
 	long start = System.currentTimeMillis();
 
 	// calling the actual sorting method
-	actualSort();
+	actualSort(array);
 
 	long duration = System.currentTimeMillis() - start;
 	LOG.info(String.format(END_SORT_MESSAGE, getAlgorithmName(), duration));
@@ -33,10 +29,9 @@ public abstract class AbstractSortService<T extends Comparable> {
 	statistics.setDuration(duration);
 
 	return statistics;
-
     }
 
-    public boolean isSorted() {
+    public boolean isSorted(final T[] array) {
 	boolean result = true;
 
 	for (int i = 0; i < array.length - 1; i++) {
@@ -49,15 +44,11 @@ public abstract class AbstractSortService<T extends Comparable> {
 	return result;
     }
 
-    public String getArray() {
-	return Arrays.toString(array);
-    }
-
-    protected abstract void actualSort();
+    protected abstract void actualSort(final T[] array);
 
     protected abstract String getAlgorithmName();
 
-    protected void exchange(int first, int second) {
+    protected void exchange(final T[] array, final int first, final int second) {
 	T auxiliar = array[first];
 	array[first] = array[second];
 	array[second] = auxiliar;

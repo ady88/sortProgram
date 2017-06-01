@@ -1,5 +1,7 @@
 package com.algorithms.sortprogram;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -19,20 +21,19 @@ public class Main {
     private static final int NUMBER_MAX_BOUND = 10000;
 
     public static void main(String[] args) {
-	Random random = new Random();
+	Injector injector = Guice.createInjector();
 
+	AbstractSortService<Integer> sortIntegerService = injector.getInstance(AbstractSortService.class);
+
+	Random random = new Random();
 	Integer[] array = random.ints(NUMBER_OF_VALUES, NUMBER_MIN_BOUND, NUMBER_MAX_BOUND).boxed().toArray(Integer[]::new);
 
-	// AbstractSortService<Integer> sortIntegerService = new IntegerSelectionSortService(array);
-	AbstractSortService<Integer> sortIntegerService = new IntegerInsertionSortService(array);
+	SortStatistics statistics = sortIntegerService.sort(array);
 
-	SortStatistics statistics = sortIntegerService.sort();
-
-	if (sortIntegerService.isSorted() == false) {
+	if (sortIntegerService.isSorted(array) == false) {
 	    LOG.severe(String.format(INCORRECT_SORT_MESSAGE, statistics.getAlgorithmName()));
 	} else {
 	    LOG.info(String.format(SUCCESS_SORT_MESSAGE, statistics.getAlgorithmName()));
 	}
     }
-
 }
