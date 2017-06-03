@@ -5,10 +5,6 @@ import com.google.inject.Injector;
 import java.util.Random;
 import java.util.logging.Logger;
 
-/**
- *
- * @author ady88
- */
 public class Main {
 
     private static final Logger LOG = Logger.getLogger(Main.class.getName());

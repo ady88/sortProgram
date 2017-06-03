@@ -10,13 +10,16 @@ public class SortServiceProvider implements Provider<AbstractSortService> {
     public AbstractSortService get() {
 	AbstractSortService sortService = null;
 	SortAlgorithms selectedSort = Configs.getSelectedSort();
-	
+
 	switch (selectedSort) {
 	    case INSERTION_SORT:
 		sortService = new IntegerInsertionSortService();
 		break;
 	    case SELECTION_SORT:
 		sortService = new IntegerSelectionSortService();
+		break;
+	    case SHELL_SORT:
+		sortService = new IntegerShellSortService();
 		break;
 	}
 

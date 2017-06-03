@@ -1,5 +1,5 @@
 package com.algorithms.sortprogram.helpers;
 
 public enum SortAlgorithms {
-    INSERTION_SORT, SELECTION_SORT
+    INSERTION_SORT, SELECTION_SORT, SHELL_SORT
 }
