@@ -6,34 +6,34 @@ public class IntegerShellSortService extends AbstractSortService<Integer> {
 
     @Override
     protected void actualSort(Integer[] array) {
-	int arraySize = array.length;
-	int step = 1;
+        int arraySize = array.length;
+        int step = 1;
 
-	while (step < arraySize / 3) {
-	    step = 3 * step + 1;
-	}
+        while (step < arraySize / 3) {
+            step = 3 * step + 1;
+        }
 
-	while (step >= 1) {
-	    for (int i = 1; i < arraySize; i = i + step) {
-		Integer elementToMove = array[i];
-		int j = i;
+        while (step >= 1) {
+            for (int i = step; i < arraySize; i = i + 1) {
+                Integer elementToMove = array[i];
+                int j = i;
 
-		while (j - step >= 0 && lessThan(elementToMove, array[j - step])) {
-		    array[j] = array[j - step];
-		    j = j - step;
-		}
+                while (j - step >= 0 && lessThan(elementToMove, array[j - step])) {
+                    array[j] = array[j - step];
+                    j = j - step;
+                }
 
-		if (i != j) {
-		    array[j] = elementToMove;
-		}
-	    }
+                if (i != j) {
+                    array[j] = elementToMove;
+                }
+            }
 
-	    step = step / 3;
-	}
+            step = step / 3;
+        }
     }
 
     @Override
     protected String getAlgorithmName() {
-	return ALGORITHM_NAME;
+        return ALGORITHM_NAME;
     }
 }
