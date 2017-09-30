@@ -1,11 +1,13 @@
-package com.algorithms.sortprogram;
+package com.algorithms.sortprogram.services;
+
+import java.util.function.BiPredicate;
 
 public class IntegerShellSortService extends AbstractSortService<Integer> {
 
     private static final String ALGORITHM_NAME = "shell sort";
 
     @Override
-    protected void actualSort(Integer[] array) {
+    protected void actualSort(Integer[] array, final BiPredicate<Integer, Integer> comparator) {
         int arraySize = array.length;
         int step = 1;
 
@@ -18,7 +20,7 @@ public class IntegerShellSortService extends AbstractSortService<Integer> {
                 Integer elementToMove = array[i];
                 int j = i;
 
-                while (j - step >= 0 && lessThan(elementToMove, array[j - step])) {
+                while (j - step >= 0 && comparator.test(elementToMove, array[j - step])) {
                     array[j] = array[j - step];
                     j = j - step;
                 }
